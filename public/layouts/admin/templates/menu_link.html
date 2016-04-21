@@ -1,0 +1,17 @@
+<div class="link_container">
+	<a 	href="#" 
+			class="dropdown-toggle" 
+			data-toggle="dropdown" 
+			role="button" 
+			aria-haspopup="true" 
+			aria-expanded="false"
+			ng-model="menulink._id">
+		{{menulink.body}}
+	</a>
+	<a ng-controller="editModalCtrl" ng-click="open()" ng-model="menulink._id">
+		<span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a ng-controller="delModalCtrl" ng-click="open()" ng-model="menulink._id" ng-show="menulink.hasChildren == 0">
+		<span class="glyphicon glyphicon-trash"></span>
+	</a>
+</div>

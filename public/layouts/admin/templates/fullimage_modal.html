@@ -1,0 +1,14 @@
+<!-- Modal Body -->
+<div class="modal-body"> 
+		<div class="fullimage-wrap">
+		<div class="gallery-control close">
+			<a ng-click="close()"><i class="fa fa-times"></i></a>
+		</div>
+			<img class="img-resize fullimage-center" ng-src="uploads/{{image.filename}}" ng-click="next()"/>	
+		</div>
+		<div class="gallery-control">
+			<a ng-click="prev()"><i class="fa fa-arrow-left"></i></a>
+			<label> {{index+1}} / {{total}} <label>
+			<a ng-click="next()"><i class="fa fa-arrow-right"></i></a>
+		</div>
+</div>

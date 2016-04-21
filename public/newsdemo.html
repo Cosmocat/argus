@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="/js/tinymce/tinymce.min.js"></script> -->
+	<link rel="stylesheet" href="/css/news.css">
+	<link rel="stylesheet" href="/css/menu.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript" src="/js/news_app.js"></script>
+
+	<body  ng-app="newsApp" ng-controller="pullNews as ctrl">
+		<nav class="navbar navbar-default navbar-fixed-top bottom_buffer">
+			<div class="container">
+				<div class="navbar-header">
+				  <a class="navbar-brand" href="#">ArgusBiotix</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="text-uppercase"><a href="#">Home</a></li>
+					<li class="dropdown text-uppercase">
+			      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
+			      <ul class="dropdown-menu multi-level">
+			      	<li class="dropdown-submenu text-capitalize">
+			      		<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conventional</a>
+			      		<ul class="dropdown-menu">
+			      			<li><a href="#">Test1</a></li>
+			      			<li><a href="#">Test2</a></li>
+			      		</ul>
+			      	</li>
+			      	<li class="dropdown text-capitalize"><a href="#">Organic</a></li>
+			      </ul>
+			    </li>
+					<li class="text-uppercase"><a href="#">Results</a></li> 
+					<li class="dropdown text-uppercase">
+			      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Education</a>
+			      <ul class="dropdown-menu">
+			        <li class="text-capitalize"><a href="#">Educational articles</a></li>
+			        <li class="text-capitalize"><a href="#">Marketing materials</a></li>
+			    	</ul>
+			    </li>
+					<li class="text-uppercase"><a href="#">News</a></li> 
+					<li class="text-uppercase"><a href="#">Contact us</a></li> 		      
+				</ul>	  
+			</div>	
+		</nav>
+		<div class="top_buffer"></div>
+		<div class="container" ng-repeat="article in news">
+				<div class="row">
+						<div class="row">
+							<div class="col-sm-10">
+								<div class="well well-md text_dark_green text_thick size_18" ng-model="article.header">
+									{{article.header}}						
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="well well-md text-center text_dark_green text_thick size_18"  
+											ng-model="article.date">
+									{{article.date | date:'MMM dd yyyy'}}
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="row">	
+					<div class="well text_dark_green" ng-bind-html="article.body">
+					</div>
+				</div>
+		</div>
+	</body>
+</html>

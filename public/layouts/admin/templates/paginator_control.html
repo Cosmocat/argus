@@ -1,0 +1,25 @@
+<div class="center_ul">
+	<ul class="pagination">
+	  <li>
+	  	<a ng-click="firstpage()">
+	  		<span class="glyphicon glyphicon-backward"></span>
+	  	</a>
+	  </li>
+	  <li>
+	  	<a ng-click="decrement()">
+	  		<span class="glyphicon glyphicon-triangle-left"></span>
+	  	</a>
+	  </li>
+	  <li ng-model="page"><a href="#"><b>{{page}}</b></a></li>
+	  <li>
+	  	<a ng-click="increment()">
+	  		<span class="glyphicon glyphicon-triangle-right"></span>
+	  	</a>
+	  </li>
+	  <li>
+	  	<a ng-click="lastpage()">
+	  		<span class="glyphicon glyphicon-forward"></span>
+	  	</a>
+	  </li>
+	</ul>
+</div>

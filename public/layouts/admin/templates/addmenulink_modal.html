@@ -1,0 +1,31 @@
+<!-- Modal Header -->
+<div class="modal-header">
+		<button type="button" class="close" 
+			 ng-click="cancel()">
+					 <span aria-hidden="true">&times;</span>
+					 <span class="sr-only">Close</span>
+		</button>
+		<h4 class="modal-title" id="myModalLabel">
+				Enter new menu link
+		</h4>
+</div>
+
+<!-- Modal Body -->
+<div class="modal-body"> 
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<div class="col-sm-10">
+					<input type="text" class="form-control" 
+					ng-model="menuLink.body" placeholder="New menu link"/>
+			</div>
+		</div>
+		<button type="button" class="btn btn-default"
+						ng-click="cancel()">
+			Close
+		</button>
+		<button type="button" class="btn btn-primary"
+						ng-click="save()">
+			Save
+		</button>
+	</form>
+</div>

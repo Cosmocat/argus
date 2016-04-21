@@ -1,0 +1,44 @@
+{
+  "preset": "airbnb",
+  "requireCurlyBraces": null,
+  "validateLineBreaks": null,
+  "requireLineFeedAtFileEnd": null,
+  "requireCapitalizedConstructors": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": {ignoreProperties: true, strict: false},
+  "validateIndentation": { "value": "\t", "allExcept": ["comments"] },
+  "disallowMultipleLineBreaks": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowTrailingWhitespace": true,
+  "disallowSpaceBeforeComma": true,
+  "disallowTrailingComma": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireTrailingComma": false,
+  "disallowPaddingNewLinesBeforeLineComments": false,
+  "disallowPaddingNewlinesInBlocks": { "open": true, "close": true },
+  "requirePaddingNewLinesAfterBlocks": {
+    "allExcept": ["inCallExpressions", "inNewExpressions", "inArrayExpressions", "inProperties"]
+  },
+  "disallowSpacesInAnonymousFunctionExpression": null,
+  "disallowSpacesInFunctionExpression": null,
+  "disallowSpacesInNamedFunctionExpression": {
+    "beforeOpeningRoundBrace": true
+  },
+  "requireSpacesInNamedFunctionExpression": {
+    "beforeOpeningCurlyBrace": true
+  },
+  "requireSpacesInAnonymousFunctionExpression": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+  "maximumNumberOfLines": 2800,
+  "disallowPaddingNewLinesBeforeLineComments": null,
+  "requirePaddingNewLinesBeforeLineComments": null,
+  "disallowIdentifierNames": ['console'],
+  "excludeFiles": [
+      "node_modules/**",
+      ".build/**",
+      "public/**",
+      "../**/public/**"
+  ],
+  "safeContextKeyword": ["self","_this"]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+	<!-- Custom CSS -->
+	<link href="css/simple-sidebar.css" rel="stylesheet">
+	<link href="css/gallery.css" rel="stylesheet">
+	<link href='css/font-awesome-4.6.1/css/font-awesome.css' rel='stylesheet'/>
+	<link href='angular-busy/dist/angular-busy.css' rel='stylesheet'/>
+  
+</head>
+<body ng-app="galleryApp" ng-controller="galleryCtrl" ng-init="initGallery(1)">
+	<div id="wrapper" ng-controller="toggleCtrl" ng-class="{ toggled: toggler == true }">
+		<div ng-include="'templates/sidebar.html'"></div>
+	  <!-- Page Content -->
+	  <div id="page-content-wrapper" ng-controller="fileUploadCtrl">
+	  	<div class="container-fluid bottom_buffer">
+	  		<a ng-click="toggle()" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
+	  	</div>
+	  	<div class="container-fluid bottom_buffer">
+	  		<h5>Let's have some rules here:</h5>
+		  	<ul>
+		  		<li>No more than 10 images at the time</li>
+	  			<li>Only JPG, JPEG, PNG or GIF allowed</li>
+	  			<li>Size of each image should not exceed 10 MB</li>
+	  			<li>You cannot upload 2 files with the same name at the same time</li>
+	  			<li>For consistency and security reasons files would be renamed and assigned random names, while keeping their extension, so be sure not to upload same picture multiple times</li>
+	  		</ul>
+	  	</div>
+	  	<div class="container-fluid">
+		    <div id="dropbox" class="dropbox bottom_buffer" ng-class="dropClass">
+		    	<div class="span12 text-center">
+			    	<span>{{dropText}}</span>
+		    		<label for="fileToUpload" ng-hide="files.length >= 10">
+		    			<span class="glyphicon glyphicon-open"></span>
+		    		</label>
+		    		<input type="file" id="fileToUpload" multiple onchange="angular.element(this).scope().setFiles(this)" />
+	    		</div>
+	    		<div class="alertContainer" style="position: fixed; top: 0; right: 0">
+						<div ng-repeat='alert in alerts track by $index' 
+									type='{{alert.type}}' 
+									class="alert alert-{{alert.type}}"
+									close='closeAlert($index)'> 
+							<p class="text-center">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong class="text-capitalize">{{alert.type}}! </strong>{{alert.msg}}
+							</p> 
+						</div>
+					</div>
+		    </div>
+			    <div ng-show="files.length">
+			        <div ng-repeat="file in files.slice(0)">
+			            <span>{{file.webkitRelativePath || file.name}}</span>
+			            (<span>{{file.size / 1024 / 1024 | number:2}} MB</span>)
+			            <a class="mybtn_remove" ng-click="removeFromList(file.name)">
+												<span class="glyphicon glyphicon-remove"></span>
+									</a>
+			        </div>
+			        <input type="button" 
+			        				ng-click="uploadFile()" 
+			        				value="Upload {{files.length}} {{files.length == 1 ? 'file' : 'files'}}" />
+			        <div ng-show="progressVisible">
+			            <div class="percent">{{progress}}%</div>
+			            <div class="progress-bar">
+			                <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="container top_buffer">
+				<div ng-include="'templates/paginator_control.html'" ng-show="totalImages > 15"></div>
+				<div ng-include="'templates/img_thumb_page.html'"></div>
+			</div>
+	  </div>
+	</div>
+	  <!-- /#page-content-wrapper -->
+
+<script type="text/javascript" src="angular-busy/dist/angular-busy.js"></script>
+<script type="text/javascript" src="js/angular_apps/gallery_app.js"></script>
+</body>
+</html>

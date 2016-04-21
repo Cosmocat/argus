@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="/js/tinymce/tinymce.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="/js/jquery-ui-1.11.4/jquery-ui.min.css">
+	<script src="/js/jquery-ui-1.11.4/jquery-ui.min.js"></script> -->
+	<!-- Custom CSS -->
+	<link href="css/simple-sidebar.css" rel="stylesheet">
+	<link href="css/newseditor.css" rel="stylesheet" >
+
+  <script type="text/javascript" src="tinymce-dist/tinymce.js"></script>
+	<script type="text/javascript" src="angular/angular.js"></script>
+	<script type="text/javascript" src="angular-ui-tinymce/src/tinymce.js"></script>
+	<script type="text/javascript" src="js/angular_apps/newseditor_app.js"></script>
+  
+</head>
+<body>
+<div id="wrapper" ng-app="newsEditorApp">
+	<div ng-include="'templates/sidebar.html'"></div>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+  <a href="#menu-toggle" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
+      <div class="container-fluid" ng-controller="tinymceHtmlCtrl as ctrl">
+			<div class="row"  ng-controller="getArticles" ng-init="init(1)">
+				<div class="col-sm-8" ng-controller="savenshareCtrl">
+					<form id="editorForm" name="editorForm" novalidate>
+						<div class="input-group top_buffer">
+							<div class="input-group-addon">Header</div>
+						      <input type="text" 
+						      			class="form-control" 
+						      			id="articleHeader" 
+						      			name="articleHeader" 
+						      			ng-model="ctrl.articleHeader" 
+						      			placeholder="Enter here..." required>
+						      <input type="text" class="form-control hidden" name="articleId" ng-model="ctrl.articleId">
+					    </div>
+					    <div ng-app="editApp" class="tinymceContainer top_buffer" ng-controller="tinymceInit">
+						  	<textarea name="articleBody" 
+						  						ui-tinymce="tinymceOptions" 
+						  						ng-model="ctrl.tinymce" 
+						  						ng-change="ctrl.updateHtml()" required>
+						  	</textarea>
+						  </div>
+						  <div class=" top_buffer bottom_buffer">
+						  <a class="mybtn_save" ng-click="save()" ng-show="editorForm.$valid">
+								<span class="glyphicon glyphicon-save large_glyph"></span> Save
+							</a>
+							<a class="mybtn_savenshare" ng-click="savenshare()" ng-show="editorForm.$valid">
+								<span class="glyphicon glyphicon-share large_glyph"></span> Save and share
+							</a>
+							</div>
+					</form>
+				</div>
+				<div class="col-sm-4">
+					<div class="row top_buffer">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Header</th>
+									<th>Date</th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody ng-repeat="article in articles">
+								<tr class="tr_min" 
+										ng-class="{ warning: article.published == false, 
+																success: article.published == true, 
+																no_border: !article._id }"
+										ng-controller="articleChange">
+									<td width="50%">{{article.header}}</td>
+									<td>{{article.date | date:'MMM dd yyyy'}}</td>
+									<td width="5%">
+										<a class="mybtn_edit" ng-click="pullArticle(article._id)" ng-hide="!article._id">
+											<span class="glyphicon glyphicon-edit"></span>
+										</a>
+									</td>
+									<td width="5%" ng-if="article.published == false">
+									<a class="mybtn_publ" ng-click="publishArticle(article._id)">
+											<span class="glyphicon glyphicon-share"></span>
+										</a>
+									</td>
+									<td width="5%" ng-if="article.published == true">
+										<a class="mybtn_unpubl" ng-click="unpublishArticle(article._id)">
+											<span class="glyphicon glyphicon-remove"></span>
+										</a>
+									</td>
+									<td width="5%">
+										<a class="mybtn_del" ng-click="deleteArticle(article._id)" ng-hide="!article._id">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="center_ul">
+							<ul class="pagination">
+							  <li>
+							  	<a ng-click="firstpage()"><span class="glyphicon glyphicon-backward"></span></a>
+							  </li>
+							  <li>
+							  	<a ng-click="decrement()"><span class="glyphicon glyphicon-triangle-left"></span></a>
+							  </li>
+							  <li ng-model="page"><a href="#"><b>{{page}}</b></a></li>
+							  <li>
+							  	<a ng-click="increment()"><span class="glyphicon glyphicon-triangle-right"></span></a>
+							  </li>
+							  <li>
+							  	<a ng-click="lastpage()"><span class="glyphicon glyphicon-forward"></span></a>
+							  </li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row top-buffer">
+					<div class="row">
+						<div class="col-sm-10">
+							<div class="well well-md text_dark_green text_thick size_18" ng-bind="ctrl.articleHeader">
+								
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="well well-md text-center text_dark_green text_thick size_18"  
+										ng-model="ctrl.date">
+								{{ctrl.date | date:'MMM dd yyyy'}}
+							</div>
+						</div>
+					</div>
+			</div>
+					<div class="row">	
+						<div class="well text_dark_green" ng-bind-html="ctrl.tinymceHtml">
+							<div class=""></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  <!-- /#page-content-wrapper -->
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+</html>

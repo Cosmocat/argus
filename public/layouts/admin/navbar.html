@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="/js/tinymce/tinymce.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="/js/jquery-ui-1.11.4/jquery-ui.min.css">
+	<script src="/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+ -->
+	<!-- Custom CSS -->
+	<link href="css/simple-sidebar.css" rel="stylesheet">
+	<link href="css/navbar.css" rel="stylesheet">
+
+	<script type="text/javascript" src="js/angular_apps/navbar_app.js"></script>
+  
+</head>
+<body ng-app="navbarApp">
+	<div id="wrapper" ng-controller="toggleCtrl" ng-class="{ toggled: toggler == true }">
+		<div ng-include src="'templates/sidebar.html'"></div>
+	  <!-- Page Content -->
+	  <div id="page-content-wrapper">
+	  	<div class="container-fluid bottom_buffer">
+	  		<a ng-click="toggle()" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
+	  	</div>
+
+		  <nav class="navbar navbar-default bottom_buffer top_buffer">
+				<div class="container-fluid">
+					<div class="navbar-header">
+					  <a class="navbar-brand" href="#">
+					  	<div contentEditable="true" ng-model="brandName">ArgusBiotix</div>
+					  </a>
+					</div>
+					<div ng-controller="getMenus" ng-init="getMenus()">
+					<ul class="nav navbar-nav">
+						<li class="dropdown text-uppercase" 
+								ng-repeat="menulink in menus | filter: menulink.parent = 'top'">
+							<div ng-include src="'templates/menu_link.html'"></div>
+							<ul class="dropdown-menu multi-level">
+								<li class="dropdown-submenu text-capitalize" 
+										ng-repeat="menulink in getChildren(menulink)">
+									<div ng-include src="'templates/menu_link.html'"></div>
+									<ul class="dropdown-menu">
+										<li class="dropdown-submenu text-capitalize" 
+											ng-repeat="menulink in getChildren(menulink)">
+										<div ng-include src="'templates/menu_link.html'"></div>
+										</li>
+										<li class="text-uppercase">
+											<a ng-controller="addModalCtrl" ng-click="open()">
+												<span class="glyphicon glyphicon-plus"></span> Add new
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="text-uppercase">
+									<a ng-controller="addModalCtrl" ng-click="open()">
+										<span class="glyphicon glyphicon-plus"></span> Add new
+									</a>
+								</li>
+				      </ul>
+						</li>
+						<li class="text-uppercase">
+							<a ng-controller="addModalCtrl" ng-click="open()">
+								<span class="glyphicon glyphicon-plus"></span> Add new
+							</a>
+						</li>
+					</ul>	
+					</div>  
+				</div>	
+			</nav>
+		</div>
+	  <!-- /#page-content-wrapper -->
+  </div>
+</body>
+</html>

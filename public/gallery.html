@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="/js/tinymce/tinymce.min.js"></script> -->
+  <link rel="stylesheet" href="/js/jquery-ui-1.11.4/jquery-ui.min.css">
+	<script src="/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+
+	<!-- Custom CSS -->
+	<link href="../css/simple-sidebar.css" rel="stylesheet">
+	<link href="../css/gallery.css" rel="stylesheet">
+
+	<script type="text/javascript" src="/js/angular_apps/gallery_app.js"></script>
+  
+</head>
+<body ng-app="galleryApp">
+	<div id="wrapper" ng-controller="toggleCtrl" ng-class="{ toggled: toggler == true }">
+		<div ng-include src="'../templates/sidebar.html'"></div>
+	  <!-- Page Content -->
+	  <div id="page-content-wrapper" ng-controller="FileUploadCtrl">
+	  	<div class="container-fluid bottom_buffer">
+	  		<a ng-click="toggle()" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
+	  	</div>
+	  	<div class="container-fluid bottom_buffer">
+	  		<ul>
+	  			<li>Only JPG, JPEG, PNG or GIF allowed</li>
+	  			<li>No more than 10 images at the time</li>
+	  			<li>Size of each image should not exceed 10 MB</li>
+	  			<li>You cannot upload 2 files with the same name at the same time</li>
+	  			<li>For persistence and security reasons files would be renamed and assigned random names, while keeping their extension, so be sure not to upload same picture multiple times</li>
+	  		</ul>
+	  	</div>
+	  	<div class="container-fluid">
+		    <div id="dropbox" class="dropbox" ng-class="dropClass">
+		    	<span>{{dropText}}</span>
+	    		<label for="fileToUpload"><span class="glyphicon glyphicon-open"></span></label>
+	    		<input type="file" id="fileToUpload" multiple onchange="angular.element(this).scope().setFiles(this)" />
+		    </div>
+			    <div ng-show="files.length">
+			        <div ng-repeat="file in files.slice(0)">
+			            <span>{{file.webkitRelativePath || file.name}}</span>
+			            (<span ng-switch="file.size > 1024*1024">
+			                <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+			                <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+			            </span>)
+			            <a class="mybtn_remove" ng-click="removeFromList(file.name)">
+												<span class="glyphicon glyphicon-remove"></span>
+									</a>
+			        </div>
+			        <input type="button" 
+			        				ng-click="uploadFile()" 
+			        				value="Upload {{files.length}} {{files.length == 1 ? 'file' : 'files'}}" />
+			        <div ng-show="progressVisible">
+			            <div class="percent">{{progress}}%</div>
+			            <div class="progress-bar">
+			                <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+			<div class="container top_buffer" ng-controller="galleryCtrl" ng-init="init(1)">
+				<div class="center_ul">
+					<ul class="pagination">
+					  <li>
+					  	<a ng-click="firstpage()"><span class="glyphicon glyphicon-backward"></span></a>
+					  </li>
+					  <li>
+					  	<a ng-click="decrement()"><span class="glyphicon glyphicon-triangle-left"></span></a>
+					  </li>
+					  <li ng-model="page"><a href="#"><b>{{page}}</b></a></li>
+					  <li>
+					  	<a ng-click="increment()"><span class="glyphicon glyphicon-triangle-right"></span></a>
+					  </li>
+					  <li>
+					  	<a ng-click="lastpage()"><span class="glyphicon glyphicon-forward"></span></a>
+					  </li>
+					</ul>
+				</div>
+  			<div class="row" ng-repeat="image in images" ng-if="$index % 5 === 0">
+	        <div class="col col-sm-2" ng-if="$index < images.length">
+	          <a href="#" class="thumbnail"><img ng-src="../uploads/{{images[$index]}}"/></a>
+	        </div>
+	        <div class="col col-sm-2" ng-if="$index + 1 < images.length">
+	          <a href="#" class="thumbnail"><img ng-src="../uploads/{{images[$index+1]}}"/></a>
+	        </div>
+	        <div class="col col-sm-2" ng-if="$index + 2 < images.length">
+	          <a href="#" class="thumbnail"><img ng-src="../uploads/{{images[$index+2]}}"/></a>
+	        </div>
+	        <div class="col col-sm-2" ng-if="$index + 3 < images.length">
+	          <a href="#" class="thumbnail"><img ng-src="../uploads/{{images[$index+3]}}"/></a>
+	        </div>
+	        <div class="col col-sm-2" ng-if="$index + 4 < images.length">
+	          <a href="#" class="thumbnail"><img ng-src="../uploads/{{images[$index+4]}}"/></a>
+	        </div>
+    		</div>
+			</div>
+	  </div>
+	</div>
+	  <!-- /#page-content-wrapper -->
+    
+</body>
+</html>

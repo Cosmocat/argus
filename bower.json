@@ -1,0 +1,24 @@
+{
+  "name": "newsblock",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Cosmocat <azasorin@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-tinymce": "latest",
+    "angular-busy": "^4.1.3"
+  }
+}
