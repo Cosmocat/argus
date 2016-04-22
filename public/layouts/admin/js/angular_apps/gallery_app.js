@@ -1,17 +1,11 @@
 'use strict';
 
-var app = angular.module('galleryApp', ['cgBusy', 'ui.bootstrap'], function () {});
+var app = angular.module('galleryApp', ['cgBusy', 'ui.bootstrap', 'toggleSideBar'], function () {});
 
 angular.module('galleryApp').value('cgBusyDefaults', {
 	message: '',
 	backdrop: false,
 	templateUrl: 'templates/img_busy.html'
-});
-// Side menubar toggle
-app.controller('toggleCtrl', function ($scope) {
-	$scope.toggle = function () {
-		$scope.toggler = !$scope.toggler;
-	};
 });
 
 app.factory('checkFile', function () {
@@ -159,7 +153,7 @@ function fileUploadCtrl(scope, rootScope, checkFile) {
 		if (scope.wrongfiles > 0) {
 			rootScope.addAlert(
 				{ type: 'info',
-					msg: scope.wrongfiles + ' files did not meet rules and cannot be upladed' },
+					msg: scope.wrongfiles + ' files did not meet rules and cannot be uploaded' },
 					5000);
 		}
 	};
@@ -296,6 +290,19 @@ app.controller('galleryCtrl', function ($scope, $http) {
 		$scope.getImages($scope.page);
 	};
 
+	
+
+	$scope.initGallery = function (pagenumber) {
+		$scope.countImages();
+		$scope.getImages(pagenumber);
+	};
+});
+
+app.controller('thumbCtrl', function ($scope, $http) {
+	$scope.setIndex = function (index) {
+		$scope.localIndex = index;
+	};
+
 	$scope.rotate = function (img) {
 		if (!$scope.promises) {
 			$scope.promises = {};
@@ -336,17 +343,6 @@ app.controller('galleryCtrl', function ($scope, $http) {
 					$scope.images[index].filename =
 						$scope.images[index].filename + '?' + new Date().getTime();
 				});
-	};
-
-	$scope.initGallery = function (pagenumber) {
-		$scope.countImages();
-		$scope.getImages(pagenumber);
-	};
-});
-
-app.controller('thumbCtrl', function ($scope) {
-	$scope.setIndex = function (index) {
-		$scope.localIndex = index;
 	};
 });
 
@@ -402,3 +398,11 @@ app.controller('fullImgViewCtrl', function ($scope, $modalInstance, $http, image
 	};
 });
 
+app.directive('thumbNail', function() {
+  return {
+      restrict: 'A',
+      replace: 'true',
+      templateUrl: 'templates/thumbnail.html',
+      controller: 'thumbCtrl'
+  };
+});
