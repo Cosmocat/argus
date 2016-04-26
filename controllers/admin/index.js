@@ -6,6 +6,7 @@ var router = express.Router();
 router.use('/newseditor', require('./newseditor'));
 router.use('/navbar', require('./navbar'));
 router.use('/gallery', require('./gallery'));
+router.use('/slider', require('./slider'));
 router.use(express.static('public'));
 router.use(express.static('public/layouts/admin'));
 router.use(express.static('bower_components'));
