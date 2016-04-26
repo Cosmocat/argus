@@ -262,7 +262,7 @@ app.controller('galleryCtrl', function ($scope, $http) {
 		$http.get('/admin/gallery/countimages')
 			.then(function (res) {
 				$scope.totalImages = res.data.count;
-				$scope.maxpages = Math.floor(res.data.count / 15) + 1;
+				res.data.count > 18 ? $scope.maxpages = Math.floor(res.data.count / 18) + 1 : $scope.maxpages = 1;
 			});
 	};
 
@@ -290,8 +290,6 @@ app.controller('galleryCtrl', function ($scope, $http) {
 		$scope.getImages($scope.page);
 	};
 
-	
-
 	$scope.initGallery = function (pagenumber) {
 		$scope.countImages();
 		$scope.getImages(pagenumber);
@@ -317,7 +315,7 @@ app.controller('thumbCtrl', function ($scope, $http) {
 				});
 	};
 
-	$scope.flipx = function (img) {
+	/*$scope.flipx = function (img) {
 		if (!$scope.promises) {
 			$scope.promises = {};
 		}
@@ -343,7 +341,7 @@ app.controller('thumbCtrl', function ($scope, $http) {
 					$scope.images[index].filename =
 						$scope.images[index].filename + '?' + new Date().getTime();
 				});
-	};
+	};*/
 });
 
 app.controller('fullImgModalCtrl', function ($scope, $modal) {

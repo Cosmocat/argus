@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var lwip = require('lwip');
+var easyimg = require('easyimage');
 var Image = require(path.join(appRoot + '/model/galleryimage'));
 var crypto = require('crypto');
 var multer  =   require('multer');
@@ -45,18 +45,16 @@ router.post('/imgupload', function (req, res) {
 			newImage.save(function (err) {
 				if (err) return console.log(err);
 			});
-			lwip.open(uploadsPath + file.filename, function (err, img) {
-				if (err) { console.log(err); }
-
-				img.batch()
-					.scale(155 / img.width())
-					.writeFile(uploadsPath + 'thumbnails/thumb_' + file.filename, function (err) {
-						if (err) { console.log(err); }
-						filesCounter++;
-						if (filesCounter === req.files.length) {
-							res.end();
-						}
-					});
+			easyimg.thumbnail({
+				src:uploadsPath + file.filename,
+				dst: uploadsPath + '/thumbnails/thumb_' + file.filename,
+				width:155, height:155,
+				x:0, y:0
+			}).then(function () {
+				filesCounter++;
+				if (filesCounter === req.files.length) {
+					res.end();
+				}
 			});
 		});
 		if (err) {
@@ -67,26 +65,22 @@ router.post('/imgupload', function (req, res) {
 });
 
 router.post('/imgrotate/:img', function (req, res) {
-	lwip.open(uploadsPath + req.params.img, function (err, img) {
-		if (err) { console.log(err); }
-
-		img.batch()
-			.rotate(90)
-			.writeFile(uploadsPath + req.params.img, function (err) {
-				if (err) { console.log(err); } else { res.end(); }
+	easyimg.rotate({
+				src:uploadsPath + req.params.img,
+				dst: uploadsPath + req.params.img,
+				degree:90
+			}).then(function () {
+				easyimg.rotate({
+					src:uploadsPath + 'thumbnails/thumb_' + req.params.img,
+					dst: uploadsPath + 'thumbnails/thumb_' + req.params.img,
+					degree:90
+				}).then(function () {
+					res.end();
+				});
 			});
-	});
-
-	lwip.open(uploadsPath + 'thumbnails/thumb_' + req.params.img, function (err, img) {
-		img.batch()
-			.rotate(90)
-			.writeFile(uploadsPath + 'thumbnails/thumb_' + req.params.img, function (err) {
-				if (err) { console.log(err); }
-			});
-	});
 });
 
-router.post('/flip/:axe/:img', function (req, res) {
+/*router.post('/flip/:axe/:img', function (req, res) {
 	lwip.open(uploadsPath + req.params.img, function (err, img) {
 		if (err) { console.log(err); }
 
@@ -105,14 +99,14 @@ router.post('/flip/:axe/:img', function (req, res) {
 			});
 	});
 });
-
+*/
 router.get('/getimages/:pagenumber', function (req, res) {
 	var pn = req.params.pagenumber - 1;
 	Image
 	.find({},
 		'_id filename mimetype size createdAt',
-		{ limit: 15,
-			skip: pn * 15,
+		{ limit: 18,
+			skip: pn * 18,
 			sort: { createdAt: -1 } },
 		function (err, images) {
 			res.json(images);
