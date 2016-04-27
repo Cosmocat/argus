@@ -11,14 +11,14 @@ router.get('/', function (req, res) {
 // } else { res.redirect('/login'); }
 });
 
-router.get('/getimages', function (req, res) {
+router.get('/getslides', function (req, res) {
 	Image
 	.find({},
 		'_id filename mimetype size createdAt',
 		{ limit: 7,
 			sort: { createdAt: -1 } },
-		function (err, images) {
-			res.json(images);
+		function (err, slides) {
+			res.json(slides);
 		});
 });
 

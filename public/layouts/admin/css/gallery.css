@@ -55,12 +55,7 @@ label{
   margin-top: 60px;
 }
 
-.center_ul {
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
+
 
 .alert {
   font-size: 0.5em;
@@ -83,59 +78,4 @@ label{
 .cg-center {
   left: -12px;
   align-self: center;
-}
-
-.control-center {
-  text-align: center;
-}
-
-.thumbnail {
-  margin-bottom: 0px;
-}
-
-.fullimgcontainer {
-  max-width: 800px;
-  max-height: 600px;
-  min-height: 400px;
-}
-
-.img-resize {
-  max-width: 800px;
-  max-height: 600px;
-  min-height: 400px;
-}
-
-.auto-modal.modal .modal-dialog{
-  max-height: 100%;
-  width: 830px;
-}
-
-.fullimage-wrap {
-  display: flex;
-  justify-content: center;
-}
-
-.fullimage-center {
-  align-self: center;
-}
-
-.gallery-control {
-  position: absolute;
-  bottom: 10px;
-  font-size: 3em;
-  color: #777;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-}
-
-.gallery-control a{
-  color: #777;
-}
-
-.gallery-control a:hover{
-  color: #333;
 }

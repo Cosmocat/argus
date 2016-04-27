@@ -1,6 +1,6 @@
 <div class="slider">
-  <div class="slide" ng-repeat="image in images" ng-show="image.visible">
-    <img class="slideimg" ng-src="uploads/{{image.filename}}" />
+  <div class="slide" ng-repeat="slide in slides" ng-show="slide.visible">
+    <img class="slideimg" ng-src="uploads/{{slide.filename}}" />
   </div>
   <div class="arrows">
     <a ng-click="prev()"><i class="fa fa-arrow-left"></i></a>
