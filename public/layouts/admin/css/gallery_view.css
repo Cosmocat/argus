@@ -1,0 +1,74 @@
+.center_ul {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.control-center {
+  text-align: center;
+}
+
+.thumbnail {
+  margin-bottom: 0px;
+}
+
+.fullimgcontainer {
+  max-width: 800px;
+  max-height: 600px;
+  min-height: 400px;
+}
+
+.img-resize {
+  max-width: 800px;
+  max-height: 600px;
+  min-height: 400px;
+}
+
+.auto-modal.modal .modal-dialog{
+  max-height: 100%;
+  width: 830px;
+}
+
+.fullimage-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.fullimage-center {
+  align-self: center;
+}
+
+.gallery-control {
+  position: absolute;
+  bottom: 10px;
+  font-size: 3em;
+  color: #777;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.gallery-control a{
+  color: #777;
+}
+
+.gallery-control a:hover{
+  color: #333;
+}
+
+.thumbcontainer { 
+  position: relative; 
+  width: 155px; 
+  height: 155px; 
+  float: left; 
+  margin-bottom: 50px;
+ }
+
+.thumbcheckbox { 
+  position: absolute; 
+  top: 0px; 
+  right: 4px; }
