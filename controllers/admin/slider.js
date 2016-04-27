@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var Image = require(path.join(appRoot + '/model/galleryimage'));
+var Slide = require(path.join(appRoot + '/model/slide'));
 
 router.get('/', function (req, res) {
 	// if (req.isAuthenticated()) {
@@ -12,14 +12,26 @@ router.get('/', function (req, res) {
 });
 
 router.get('/getslides', function (req, res) {
-	Image
+	Slide
 	.find({},
-		'_id filename mimetype size createdAt',
+		'_id filename orderId',
 		{ limit: 7,
-			sort: { createdAt: -1 } },
+			sort: { orderId: -1 } },
 		function (err, slides) {
 			res.json(slides);
 		});
+});
+
+router.post('/setslides', function (req, res) {
+	req.body.forEach(function (filename) {
+		var newSlide = new Slide({
+			filename: filename,
+		});
+		newSlide.save(function (err) {
+			if (err) return console.log(err);
+		});
+	});
+	res.end();
 });
 
 module.exports = router;

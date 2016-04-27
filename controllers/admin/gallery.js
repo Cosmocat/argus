@@ -79,27 +79,6 @@ router.post('/imgrotate/:img', function (req, res) {
 				});
 			});
 });
-
-/*router.post('/flip/:axe/:img', function (req, res) {
-	lwip.open(uploadsPath + req.params.img, function (err, img) {
-		if (err) { console.log(err); }
-
-		img.batch()
-			.flip(req.params.axe)
-			.writeFile(uploadsPath + req.params.img, function (err) {
-				if (err) { console.log(err); } else { res.end(); }
-			});
-	});
-
-	lwip.open(uploadsPath + 'thumbnails/thumb_' + req.params.img, function (err, img) {
-		img.batch()
-			.flip(req.params.axe)
-			.writeFile(uploadsPath + 'thumbnails/thumb_' + req.params.img, function (err) {
-				if (err) { console.log(err); }
-			});
-	});
-});
-*/
 router.get('/getimages/:pagenumber', function (req, res) {
 	var pn = req.params.pagenumber - 1;
 	Image

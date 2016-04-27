@@ -1,5 +1,6 @@
 <div class="row" ng-repeat="image in images" ng-if="$index % 6 === 0">
   <div ng-repeat="i in [0,1,2,3,4,5]">
-  	<div thumb-nail ng-init="setIndex($parent.$parent.$index+i)"></div>
+  	<div thumb-nail ng-init="setIndex($parent.$parent.$index+i)">
+  	</div>
   </div>
 </div>
