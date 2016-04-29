@@ -1,0 +1,17 @@
+<div class="col col-sm-2 thumbnail_holder"
+    id="slidethumb{{$index}}"
+    data-drop="true" 
+    ng-model='slidethumbs' 
+    data-jqyoui-options="{accept:'.thumb_draggable'}"
+    jqyoui-droppable="{onDrop: 'thumbDropped()'}">
+  <div class="thumbnail">
+    <img ng-src="uploads/thumbnails/thumb_{{slidethumb.filename}}" ng-if="slidethumb.filename != 'none'"/> 
+    <div class="thumbholder_label" 
+        ng-show="slidethumb.filename == 'none'">
+        Add slide here dragging from gallery below
+    </div>
+  </div>
+  <div class="control-center">
+      <a ng-click="remove(slidethumb.orderId)" ng-show="slidethumb.filename != 'none'"><i class="fa fa-trash"></i></a>
+    </div>
+</div>

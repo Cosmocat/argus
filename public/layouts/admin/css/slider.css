@@ -25,3 +25,14 @@
 	width: 100%;
 	height: 100%;
 }
+
+.thumbnail_holder { 
+  padding: 5px 5px 5px 5px; 
+  min-height: 200px !important;    
+  text-align: center;
+}
+
+.thumbholder_label {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}

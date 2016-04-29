@@ -25,13 +25,16 @@
 	  		<a ng-click="toggle()" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
 	  	</div>
 	  	<div class="container-fluid">
-	  		<slider slides="slides" ng-if="slidesLoaded"/>
+	  		<slider slides="slides" ng-if="slidesLoaded &amp;&amp; slides.length > 0"/>
 	  	</div>
-	  	<input type="submit" class="btn btn-default pull-right" form="sliderCheck" value="Submit slides">
+	  		<div "row-fluid" ng-repeat="slidethumb in slidethumbs | orderBy : 'orderId'" ng-if="slidesLoaded">
+	  				<div slidethumb-nail>
+	        	</div>
+	  		</div>
 	  	<div class="container-fluid top_buffer">
 	  		<div ng-include="'templates/paginator_control.html'" ng-show="totalImages > 18"></div>
 	  		<form id="sliderCheck" ng-submit="submitCheckedSlides()">
-	  			<div ng-include="'templates/img_thumb_page.html'"></div>
+	  			<div ng-include="'templates/img_thumb_page_dragdrop.html'"></div>
 	  		</form>
 	  	</div>
 	  </div>
@@ -44,10 +47,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="angular-dragdrop/src/angular-dragdrop.min.js"></script>
+
 <script type="text/javascript" src="angular-busy/dist/angular-busy.js"></script>
-<script type="text/javascript" src="js/angular_apps/slider_app.js"></script>
-<script type="text/javascript" src="js/angular_apps/gallery_view_app.js"></script>
+<script type="text/javascript" src="js/angular_apps/slider_dragdrop_app.js"></script>
+<script type="text/javascript" src="js/angular_apps/gallery_view_app_dragdrop.js"></script>
 <script type="text/javascript" src="js/angular_apps/toggle_sb.js"></script>
 
 </body>

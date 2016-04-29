@@ -122,11 +122,11 @@ app.controller('fullImgViewCtrl', function ($scope, $modalInstance, $http, image
 	};
 });
 
-app.directive('thumbNail', function() {
-  return {
-      restrict: 'A',
-      replace: 'true',
-      templateUrl: 'templates/thumbnail.html',
-      controller: 'thumbCtrl'
-  };
+app.directive('thumbNail', function () {
+	return {
+		restrict: 'A',
+		replace: 'true',
+		templateUrl: 'templates/thumbnail_dragdrop.html',
+		controller: 'thumbCtrl'
+	};
 });

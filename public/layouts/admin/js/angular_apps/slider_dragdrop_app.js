@@ -6,27 +6,39 @@ app.controller('sliderCtrl', function ($scope, $http, $controller) {
 	$controller('galleryCtrl', { $scope: $scope });
 	$scope.initGallery(1);
 	$scope.slidesLoaded = false;
+	$scope.slidethumbs = [];
+
 	$scope.initSlider = function () {
 		$http.get('/admin/slider/getslides/')
 		.then(function (res) {
-			$scope.slides = res.data;
+			$scope.slides = [];
+			$scope.slidethumbs = res.data.slice();
+			res.data.forEach(function (slide) {
+				if (slide.filename !== 'none') {
+					$scope.slides.push(slide);
+				}
+			});
+			$scope.slides.reverse();
 			$scope.slidesLoaded = true;
 		});
 	};
 
-	$scope.cbModel = {};
-
-	$scope.submitCheckedSlides = function () {
-		var data = [];
-		for (var id in $scope.cbModel) {
-			data.push($scope.images[id].filename);
-		};
-
-		$http.post('/admin/slider/setslides', data)
+	$scope.remove = function (orderId) {
+		$http.post('/admin/slider_dragdrop/removeslide', { orderId: orderId })
 			.then(function () {
 				$scope.initSlider();
-				$scope.cbModel = {};
 			});
+	};
+
+	$scope.thumbDropped = function (index) {
+		var orderId = Number(index.target.getAttribute('id').slice(-1));
+		$scope.slidethumbs[5 - orderId].filename = $scope.slidethumbs[6].filename;
+		$scope.slidethumbs.pop();
+		$http.post('/admin/slider_dragdrop/setslide',
+			{ orderId: orderId, filename: $scope.slidethumbs[5 - orderId].filename })
+			.then(
+				$scope.initSlider()
+			);
 	};
 });
 
@@ -75,5 +87,14 @@ app.directive('slider', function ($timeout) {
 		/* End : For Automatic slideshow*/
 		},
 		templateUrl: 'templates/slider_template.html'
+	};
+});
+
+app.directive('slidethumbNail', function () {
+	return {
+		restrict: 'A',
+		replace: 'true',
+		templateUrl: 'templates/slidethumbnail_dragdrop.html',
+		controller: 'thumbCtrl'
 	};
 });
