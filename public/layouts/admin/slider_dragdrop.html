@@ -25,9 +25,10 @@
 	  		<a ng-click="toggle()" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
 	  	</div>
 	  	<div class="container-fluid">
-	  		<slider slides="slides" ng-if="slidesLoaded &amp;&amp; slides.length > 0"/>
+	  		<slider slides="slides" ng-if="slidesLoaded &amp;&amp; noneCounter"/>
 	  	</div>
-	  		<div "row-fluid" ng-repeat="slidethumb in slidethumbs | orderBy : 'orderId'" ng-if="slidesLoaded">
+
+	  		<div "row-fluid" ng-repeat="slide in slides | orderBy : 'orderId'" ng-if="slidesLoaded">
 	  				<div slidethumb-nail>
 	        	</div>
 	  		</div>
@@ -40,6 +41,7 @@
 	  </div>
 	</div>
 	  <!-- /#page-content-wrapper -->
+
 
 
 <script src="angular/angular.js"></script>
