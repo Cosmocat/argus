@@ -6,9 +6,12 @@ app.controller('galleryCtrl', function ($scope, $http) {
 	$scope.page = $scope.page || 1;
 
 	$scope.getImages = function (pagenumber) {
+		$scope.imagesLoaded = false;
 		$http.get('/admin/gallery/getimages/' + pagenumber)
 			.then(function (res) {
 				$scope.images = res.data;
+				$scope.images.reverse();
+				$scope.imagesLoaded = true;
 			});
 	};
 

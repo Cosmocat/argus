@@ -96,7 +96,7 @@ router.get('/getimages', function (req, res) {
 	Image
 	.find({},
 		'_id filename mimetype size createdAt',
-		{	sort: { createdAt: -1 } },
+		{	sort: { createdAt: 1 } },
 		function (err, images) {
 			res.json(images);
 		});

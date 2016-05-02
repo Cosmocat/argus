@@ -4,15 +4,14 @@
   </div>
   <div class="thumb_draggable" 
       data-drag="true" 
+      ng-model="images" 
       data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-      ng-model="images[localIndex]" 
-      jqyoui-draggable="{index: {{localIndex}}, placeholder:true, animate:true}">      
+      jqyoui-draggable="{index: {{localIndex}}, placeholder:'keep', animate:true}">      
     <div class="thumbcontainer">
       <a ng-controller="fullImgModalCtrl" ng-dblclick="open(localIndex)" class="thumbnail">
           <img ng-src="uploads/thumbnails/thumb_{{images[localIndex].filename}}"/>      
       </a>
       <div class="control-center">
-        <a ng-click="rotate(images[localIndex].filename)"><i class="fa fa-rotate-right"></i></a>
         <span>{{images[localIndex].size / 1024 / 1024 | number:2}} MB</span>
       </div>
     </div>

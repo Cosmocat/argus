@@ -3,7 +3,7 @@
     <div cg-busy="promises[images[localIndex].filename]" class="cg-center"></div>
   </div>
   <div class="thumbcontainer">
-    <a ng-controller="fullImgModalCtrl" ng-click="open(localIndex)" class="thumbnail">
+    <a ng-controller="fullImgModalCtrl" ng-dblclick="open(localIndex)" class="thumbnail">
         <img ng-src="uploads/thumbnails/thumb_{{images[localIndex].filename}}"/>      
     </a>
     <input type="checkbox" class="thumbcheckbox" form="sliderCheck" ng-model="cbModel[localIndex]">
