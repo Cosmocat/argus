@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<!-- Custom CSS -->
+	<link href="css/navbar.css" rel="stylesheet">
+	<link href="css/slider.css" rel="stylesheet">
+
+	
+</head>
+<body ng-app="indexApp" ng-controller="sliderCtrl" ng-init="initSlider()">
+	<div id="wrapper">
+	  <!-- Page Content -->
+	  <div id="page-content-wrapper">
+	  	<div ng-include src="'templates/navbar.html'"></div>
+	  	<div class="container-fluid">
+	  		<slider slides="slides" ng-if="slidesLoaded"/>
+	  	</div>
+		</div>
+	  <!-- /#page-content-wrapper -->
+  </div>
+
+  <script src="angular/angular.js"></script>
+  <script src="angular-animate/angular-animate.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+  <script type="text/javascript" src="js/angular_apps/main/index_app.js"></script>
+  <script type="text/javascript" src="js/angular_apps/navbar_app.js"></script>
+  <script type="text/javascript" src="js/angular_apps/slider_app.js"></script>
+  
+</body>
+</html>

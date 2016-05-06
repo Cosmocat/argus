@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default bottom_buffer top_buffer">
+	<div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="#">
+		  	<div ng-model="brandName">ArgusBiotix</div>
+		  </a>
+		</div>
+		<div ng-controller="getMenus" ng-init="getMenus()">
+		<ul class="nav navbar-nav">
+			<li class="dropdown text-uppercase" 
+					ng-repeat="menulink in menus | filter: menulink.parent = 'top'">
+				<div ng-include src="'templates/menu_link.html'"></div>
+				<ul class="dropdown-menu multi-level" ng-if="menulink.hasChildren > 0">
+					<li class="dropdown-submenu text-capitalize" 
+							ng-repeat="menulink in getChildren(menulink)">
+						<div ng-include src="'templates/menu_link.html'"></div>
+						<ul class="dropdown-menu" ng-if="menulink.hasChildren > 0">
+							<li class="dropdown-submenu text-capitalize" 
+								ng-repeat="menulink in getChildren(menulink)">
+							<div ng-include src="'templates/menu_link.html'"></div>
+							</li>
+						</ul>
+					</li>
+	      </ul>
+			</li>
+		</ul>	
+		</div>  
+	</div>	
+</nav>

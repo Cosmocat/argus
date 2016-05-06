@@ -7,6 +7,7 @@ var path = require('path');
 var Article = require(path.join(appRoot + '/model/article'));
 
 router.use('/admin', require('./admin/index'));
+router.use('/', require('./main/index'));
 
 router.get('/newsdemo', function (req, res) {
 	res.sendFile(path.join(appRoot + '/public/newsdemo.html'));

@@ -9,7 +9,7 @@
       jqyoui-draggable="{index: {{localIndex}}, placeholder:'keep', animate:true}">      
     <div class="thumbcontainer">
       <a ng-controller="fullImgModalCtrl" ng-dblclick="open(localIndex)" class="thumbnail">
-          <img ng-src="uploads/thumbnails/thumb_{{images[localIndex].filename}}"/>      
+          <img ng-src="thumbnails/thumb_{{images[localIndex].filename}}"/>      
       </a>
       <div class="control-center">
         <span>{{images[localIndex].size / 1024 / 1024 | number:2}} MB</span>

@@ -1,32 +1,16 @@
 'use strict';
 
-var app = angular.module('sliderApp', ['ngAnimate', 'toggleSideBar', 'galleryViewApp', 'ngDragDrop']);
+var app = angular.module('sliderApp', ['ngAnimate']);
 
-app.controller('sliderCtrl', function ($scope, $http, $controller) {
-	$controller('galleryCtrl', { $scope: $scope });
-	$scope.initGallery(1);
+app.controller('sliderCtrl', function ($scope, $http) {
 	$scope.slidesLoaded = false;
 	$scope.initSlider = function () {
 		$http.get('/admin/slider/getslides/')
 		.then(function (res) {
 			$scope.slides = res.data;
 			$scope.slidesLoaded = true;
+			$scope.slides.reverse();
 		});
-	};
-
-	$scope.cbModel = {};
-
-	$scope.submitCheckedSlides = function () {
-		var data = [];
-		for (var id in $scope.cbModel) {
-			data.push($scope.images[id].filename);
-		};
-
-		$http.post('/admin/slider/setslides', data)
-			.then(function () {
-				$scope.initSlider();
-				$scope.cbModel = {};
-			});
 	};
 });
 

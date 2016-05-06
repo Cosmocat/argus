@@ -168,7 +168,7 @@ app.controller('editMenuLink', function ($scope, $modalInstance, menuLink) {
 	};
 });
 
-/*app.directive('contenteditable', function () {
+app.directive('contenteditable', function () {
 	return {
 		require: 'ngModel',
 		link: function (scope, elm, attrs, ctrl) {
@@ -201,4 +201,4 @@ app.controller('editMenuLink', function ($scope, $modalInstance, menuLink) {
 			});
 		}
 	};
-});*/
+});

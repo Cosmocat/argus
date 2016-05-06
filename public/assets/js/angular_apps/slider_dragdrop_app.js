@@ -1,6 +1,7 @@
 'use strict';
 
-var app = angular.module('sliderApp', ['ngAnimate', 'toggleSideBar', 'galleryViewApp', 'ngDragDrop']);
+var app = angular.module('sliderApp',
+	['ngAnimate', 'toggleSideBar', 'galleryViewApp', 'ngDragDrop']);
 
 app.factory('slideCounter', function () {
 	return {
@@ -32,7 +33,6 @@ app.controller('sliderCtrl', function (slideCounter, $scope, $http, $controller)
 		$http.post('/admin/slider_dragdrop/removeslide', { orderId: orderId })
 			.then(function () {
 				$scope.slides[orderId].filename = 'none';
-				console.log($scope.currentIndex);
 				$scope.noneCounter = slideCounter.noneCounter($scope.slides);
 			});
 	};
@@ -47,7 +47,7 @@ app.controller('sliderCtrl', function (slideCounter, $scope, $http, $controller)
 	};
 });
 
-app.directive('slider', function ($timeout, slideCounter) {
+app.directive('slider', function ($timeout) {
 	return {
 		restrict: 'E',
 		replace: true,

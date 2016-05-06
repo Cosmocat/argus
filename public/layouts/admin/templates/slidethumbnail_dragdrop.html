@@ -5,7 +5,7 @@
     data-jqyoui-options="{accept:'.thumb_draggable:not([ng-model=slides])'}"
     jqyoui-droppable="{onDrop: 'thumbDropped()'}">
   <div class="thumbnail">
-    <img ng-src="uploads/thumbnails/thumb_{{slide.filename}}" ng-if="slide.filename != 'none'"/> 
+    <img ng-src="thumbnails/thumb_{{slide.filename}}" ng-if="slide.filename != 'none'"/> 
     <div class="thumbholder_label" 
         ng-show="slide.filename == 'none'">
         Add slide here dragging from gallery below
