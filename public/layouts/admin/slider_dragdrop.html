@@ -11,7 +11,7 @@
 	<!-- Custom CSS -->
 	<link href="css/simple_sidebar.css" rel="stylesheet">
 	<link href="css/gallery_view.css" rel="stylesheet">
-	<link href="css/slider.css" rel="stylesheet">
+	<link href="css/admin/slider.css" rel="stylesheet">
 	<link href='css/font-awesome-4.6.1/css/font-awesome.css' rel='stylesheet'/>
 	<link href='angular-busy/dist/angular-busy.css' rel='stylesheet'/>
   
@@ -24,19 +24,16 @@
 	  	<div class="container-fluid bottom_buffer">
 	  		<a ng-click="toggle()" class="btn btn-default pull-right" id="menu-toggle">Toggle Menu</a>
 	  	</div>
-	  	<div class="container-fluid">
+	  	<div class="container-fluid slider-cont">
 	  		<slider slides="slides" ng-if="slidesLoaded &amp;&amp; noneCounter"/>
 	  	</div>
-
-	  		<div "row-fluid" ng-repeat="slide in slides | orderBy : 'orderId'" ng-if="slidesLoaded">
-	  				<div slidethumb-nail>
-	        	</div>
-	  		</div>
+  		<div "row-fluid" ng-repeat="slide in slides | orderBy : 'orderId'" ng-if="slidesLoaded">
+  				<div slidethumb-nail>
+        	</div>
+  		</div>
 	  	<div class="container-fluid top_buffer">
 	  		<div ng-include="'templates/paginator_control.html'" ng-show="totalImages > 18"></div>
-	  		<form id="sliderCheck" ng-submit="submitCheckedSlides()">
 	  			<div ng-include="'templates/img_thumb_page_dragdrop.html'" ng-if="imagesLoaded"></div>
-	  		</form>
 	  	</div>
 	  </div>
 	</div>

@@ -20,10 +20,9 @@ app.controller('sliderCtrl', function (slideCounter, $scope, $http, $controller)
 	$scope.initGallery(1);
 	$scope.slidesLoaded = false;
 	$scope.initSlider = function () {
-		$http.get('/admin/slider/getslides/')
+		$http.get('/admin/slider_dragdrop/getslides/')
 		.then(function (res) {
 			$scope.slides = res.data;
-			$scope.slides.reverse();
 			$scope.slidesLoaded = true;
 			$scope.noneCounter = slideCounter.noneCounter($scope.slides);
 		});

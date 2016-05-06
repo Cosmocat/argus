@@ -12,8 +12,9 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<!-- Custom CSS -->
-	<link href="css/navbar.css" rel="stylesheet">
-	<link href="css/slider.css" rel="stylesheet">
+	<link href="css/main/navbar.css" rel="stylesheet">
+	<link href="css/main/slider.css" rel="stylesheet">
+	<link href="css/flat-bootstrap.css" rel="stylesheet">
 
 	
 </head>
@@ -22,7 +23,7 @@
 	  <!-- Page Content -->
 	  <div id="page-content-wrapper">
 	  	<div ng-include src="'templates/navbar.html'"></div>
-	  	<div class="container-fluid">
+	  	<div class="container-fluid slider-cont">
 	  		<slider slides="slides" ng-if="slidesLoaded"/>
 	  	</div>
 		</div>
