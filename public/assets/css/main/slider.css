@@ -10,7 +10,7 @@
 } 
  
 .slide.ng-enter {
-    left: 100%;
+    left: -100%;
 }
 .slide.ng-enter.slide.ng-enter-active {
     left: 0;
@@ -19,7 +19,21 @@
 .slide.ng-leave {
     left: 0;
 }
-.slide.ng-leave.slide.ng-leave-active{
+.slide.ng-leave.slide.ng-leave-active {
+    left: 100%;
+}
+
+.slide.right.ng-enter {
+    left: 100%;
+}
+.slide.right.ng-enter.slide.ng-enter-active {
+    left: 0;
+}
+ 
+.slide.right.ng-leave {
+    left: 0;
+}
+.slide.right.ng-leave.slide.ng-leave-active {
     left: -100%;
 }
 
@@ -65,7 +79,7 @@
   border: solid 1px;
   background-color: #333;
   text-align: center;
-  line-height: 32px;
+  line-height: 36px;
   font-size: 20px;
 }
 

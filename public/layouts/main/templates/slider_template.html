@@ -1,5 +1,5 @@
 <div class="slider">
-  <div class="slide" ng-repeat="slide in slides" ng-if="slide.visible">
+  <div class="slide" ng-repeat="slide in slides" ng-class="slide.direction" ng-if="slide.visible">
   	<div class="left-control">
   		<a ng-click="prev()"><</a>
   	</div>

@@ -23,18 +23,22 @@ app.directive('slider', function ($timeout) {
 		},
 		link: function (scope, elem, attrs) {
 			scope.currentIndex = 0;
+			var direction = '';
 
 			scope.next = function () {
 			scope.currentIndex < scope.slides.length - 1 ? scope.currentIndex++ : scope.currentIndex = 0;
+			direction = '';
 		};
 
 			scope.prev = function () {
 			scope.currentIndex > 0 ? scope.currentIndex-- : scope.currentIndex = scope.slides.length - 1;
+			direction = 'right';
 		};
 
 			scope.$watch('currentIndex', function () {
 			scope.slides.forEach(function (slide) {
 				slide.visible = false;
+				slide.direction = direction;
 			});
 			scope.slides[scope.currentIndex].visible = true;
 		});
